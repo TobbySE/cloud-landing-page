@@ -3,6 +3,7 @@ const app = express();
 const PORT = 8080;
 
 app.use(express.static('public'));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send(`
@@ -57,7 +58,7 @@ app.get('/', (req, res) => {
     	  animation: bounceIn 0.8s ease-out both;
   	}
        </style>
-      <link rel="stylesheet" href="/public/styles.css">
+      <link rel="stylesheet" href="/styles.css">
 
     </head>
 
@@ -79,7 +80,8 @@ app.get('/', (req, res) => {
 	 </div>
 	 </div>
 	<section/>
-      </div>
+
+	<br> 
 
      <div class="mb-6">
       <p class="text-md">
@@ -92,7 +94,7 @@ app.get('/', (req, res) => {
 
     <div>
      <section class="bg-white shadow-md rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-green-800 mb-4">Get in Touch:</h2>
+      <h2 class="text-2xl font-bold text-center text-green-800 mb-4">Get in Touch:</h2>
         <form id="contact-form" method="POST" class="space-y-4">
 	<div>
          <label for="name" class="block font-medium text-gray-700">Name:</label>
@@ -106,12 +108,13 @@ app.get('/', (req, res) => {
          <label for="message" class="block font-medium text-gray-700">Message:</label>
          <textarea name="message" rows="5" required class="w-full p-2 border rounded-md"></textarea>
 	</div>
-	<button type="submit" class="bg-green-700 text-white font-semibold py-2 px-4 rounded hover:bg-green-800">
+	<button type="submit" class="bg-green-700 text-center text-white font-semibold py-2 px-4 rounded hover:bg-green-800">
 	    Send Message
 	</button>
         </form>
       </section>
     </div>
+   </div>
 
      <div id="toast-success" class="toast">Message sent!</div>
      <div id="toast-error" class="toast error">Something went wrong. Let's try again.</div>
@@ -121,7 +124,7 @@ app.get('/', (req, res) => {
         const toastSuccess = document.getElementById('toast-success');
         const toastError = document.getElementById('toast-error');
 
-	form.addEventListener('submit', async function (e) => {
+	form.addEventListener('submit', async function (e) {
           e.preventDefault();
 
           const formData = new FormData(form);
@@ -148,14 +151,10 @@ app.get('/', (req, res) => {
               toastError.classList.add('show');
               setTimeout(() => toastError.classList.remove('show'), 3000);
             console.log("Oops! Network error.");
-	      toastSuccess.addEventListener('click', () => {
-   	        toastSuccess.classList.remove('show');
-	      });
-
-	  toastError.addEventListener('click', () => {
-	    toastError.classList.remove('show');
-          }
-        });
+	   }
+	});
+	      toastSuccess.addEventListener('click', () => toastSuccess.classList.remove('show'));
+	  toastError.addEventListener('click', () => toastError.classList.remove('show'));
       </script>
 
      <footer>

@@ -347,3 +347,10 @@ nano ~/server.js
 nano public/styles.css
 nano ~/server.js
 nano public/styles.css
+clear
+nano ~/server.js
+nano public/styles.css
+pm2 server
+pm2 restart server
+
+nano public/styles.css
